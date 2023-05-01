@@ -47,6 +47,10 @@ const StyledDiv = styled.div`
                 color: gray;
                 cursor: pointer;
             }
+
+            button{
+                background-color: #0099ff;
+            }
         }
     }
 `

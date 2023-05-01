@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -10,13 +11,34 @@ interface Props {
     name: string, 
     count?: number, 
     img?: string, 
-    clickHandler: Function
+    clickHandler: VoidFunction
 }
 
-export default function AccountBox(props: Props) {
+let render = 0;
+
+export default function AccountBox(props: Props): JSX.Element {
+
+    const [imgsrc, setImgSrc] = useState<string>()
+
+    useEffect(() => {
+
+        if(props.type.chat && props.img == undefined){
+            setImgSrc("https://img.freepik.com/free-icon/user_318-875902.jpg")
+        }
+
+        if(props.type.folder && props.img == undefined){
+            setImgSrc("https://img.freepik.com/free-psd/3d-rendering-ui-icon_23-2149182288.jpg")
+        }
+
+        if(props.type.channel && props.img == undefined){
+            setImgSrc("https://img.freepik.com/premium-vector/vector-cartoon-television-monitor-icon-comic-style-tv-screen-concept-illustration-pictogram-tv-show-business-splash-effect-concept_157943-4378.jpg")
+        }
+        console.log(render++);
+    });
+
     return (
-        <StyledDiv>
-            <img src={props.img} />
+        <StyledDiv onClick={props.clickHandler}>
+            <img src={ (imgsrc != undefined)? imgsrc : props.img} />
             <div className="details">
                 <p>{props.name}</p>
             </div>
@@ -25,11 +47,6 @@ export default function AccountBox(props: Props) {
     )
 }
 
-// Defalut props
-AccountBox.defaultProps = {
-    count: "",
-    img: "https://img.freepik.com/free-psd/3d-rendering-ui-icon_23-2149182288.jpg"
-}
 
 // Css in Js
 const StyledDiv = styled.div`

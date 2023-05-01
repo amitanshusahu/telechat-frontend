@@ -46,6 +46,10 @@ const StyledDiv = styled.div`
             flex-direction: column;
             gap: 15px;
 
+            button{
+                background-color: #0099ff;
+            }
+
             a{
                 text-align: center;
                 color: gray;

@@ -1,19 +1,61 @@
 import styled from "styled-components"
 import SearchBox from "./components/SearchBox"
 import ChatView from "./components/ChatView"
+import {useState } from "react"
+import StatusView from "./components/StatusView";
+import ExploreView from "./components/ExplorerView";
 
-export default function TabLayout(){
+export default function TabLayout(props : {setRenderViewLayout: Function}){
+
+    // ChatView.tsx will be rendered on tab layout by default
+    const [renderView, setRenderView] = useState<JSX.Element>(
+        <ChatView setRenderViewLayout={props.setRenderViewLayout}/>
+    );
+    
+    // highlight the selected tab on click
+    const showTab = (e: any) => {
+        //adds highlight style
+        if(e.target.className != "active"){
+            e.target.classList.add("active");
+        }
+
+        document.querySelectorAll("#tabs button").forEach(element => {
+            if(element != e.target){
+                element.className = "";
+            }
+        });
+    }
+
     return(
         <StyledSection>
+
             <SearchBox />
-            <div className="tabs">
-                <button id="active">Chat</button>
-                <button>Status</button>
-                <button>Explore</button>
+
+            <div className="tabs" id="tabs">
+                <button 
+                className="active"
+                onClick={showTab} 
+                onMouseDown={() => setRenderView(<ChatView setRenderViewLayout={props.setRenderViewLayout}/>)}>
+                    Chat
+                </button>
+
+                <button 
+                onClick={showTab}
+                onMouseDown={() => setRenderView(<StatusView />)}>
+                    Status
+                </button>
+
+                <button 
+                onClick={showTab} 
+                onMouseDown={() => setRenderView(<ExploreView />)}>
+                    Explore
+                </button>
             </div>
+
             <div className="tab-view">
-                <ChatView />
+                {renderView}
             </div>
+            
         </StyledSection>
     )
 }
@@ -34,7 +76,7 @@ const StyledSection = styled.section`
             font-weight: bold;
             cursor: pointer;
         }
-        button[id="active"]{
+        .active{
             color: grey;
         }
     }

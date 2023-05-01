@@ -18,6 +18,7 @@ const StyledDiv = styled.div`
     align-items: center;
     gap: 15px;
     border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0, 85, 64, 0.1);
     /* top: 0; */
 
     #contact-profile{

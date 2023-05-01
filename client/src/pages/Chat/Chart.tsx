@@ -2,16 +2,25 @@ import styled from "styled-components"
 import NavLayout from "./Components/Contact_Section/Side_Navigation/NavLayout";
 import TabLayout from "./Components/Contact_Section/Tabs/TabLayout";
 import ViewLayout from "./Components/View_Section/ViewLayout";
+import { useState } from "react";
 
 export default function Chart(){
+
+    // to render the layout in ViewLayout.tsx when we select something from the tabs (ChatView.tsx)
+    const [renderLayout, setRenderViewLayout] = useState<Object>({
+        chat: false,
+        channel: false,
+        group: false
+    });
+
     return(
         <StyledLayout>
             <div className="contact-section">
                 <NavLayout />
-                <TabLayout />
+                <TabLayout setRenderViewLayout={setRenderViewLayout}/>
             </div>
 
-            <ViewLayout />
+            <ViewLayout renderLayout={renderLayout}/>
         </StyledLayout>
     )
 }
