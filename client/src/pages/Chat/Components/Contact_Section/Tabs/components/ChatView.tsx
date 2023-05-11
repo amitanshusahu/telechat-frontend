@@ -2,25 +2,65 @@ import styled from "styled-components"
 import { Add } from "../../../../../../assets/Icons"
 import AccountBox from "./AccountBox"
 import { useState } from "react"
+import ChatBackButton from "./ChatBackButton";
+// import { contacts } from "../../../../../../assets/DummyContacts"
+
+// const accounts = contacts;
 
 export default function ChatView(props: {setRenderViewLayout: Function}): JSX.Element{
 
-    const [isFolderSelected, setIsFolderSelected] = useState<boolean>(false);
+    const [isFolderSelected, setIsFolderSelected] = useState<{isSelected:boolean, type: String}>({
+        isSelected : false,
+        type: "empty"
+    });
 
     // runs if user selects a folder from chat tab (ChatView.tsx)
-    const showContactAccounts: VoidFunction = () => {
-        setIsFolderSelected(true);
+    const showContactAccounts: Function = (type: String) => {
+        setIsFolderSelected({
+            isSelected: true,
+            type
+        });
     }
 
     // if folder is selected, show user accounts else show folders
-    if(isFolderSelected){
+    if(isFolderSelected.isSelected){
+        if(isFolderSelected.type === "chat"){
+            return (
+                <StyledDiv>
+                    <ChatBackButton setIsFolderSelected={setIsFolderSelected}/>
+                    <AccountBox 
+                    type={{chat: true}} 
+                    name="Amitanshu Sahu" 
+                    clickHandler={() => props.setRenderViewLayout({chat: true})}/>
+                </StyledDiv>
+            )
+        }
+        if(isFolderSelected.type === "channel"){
+            return (
+                <StyledDiv>
+                    <ChatBackButton setIsFolderSelected={setIsFolderSelected}/>
+                    <AccountBox 
+                    type={{chat: true}} 
+                    name="Amitanshu Sahu" 
+                    clickHandler={() => props.setRenderViewLayout({chat: true})}/>
+                </StyledDiv>
+            )
+        }
+        if(isFolderSelected.type === "group"){
+            return (
+                <StyledDiv>
+                   <ChatBackButton setIsFolderSelected={setIsFolderSelected}/>
+                    <AccountBox 
+                    type={{chat: true}} 
+                    name="Amitanshu Sahu" 
+                    clickHandler={() => props.setRenderViewLayout({chat: true})}/>
+                </StyledDiv>
+            )
+        }
+
         return (
             <StyledDiv>
-                <button id="folder" onClick={() => setIsFolderSelected(false) }> Back to folders</button>
-                <AccountBox 
-                type={{chat: true}} 
-                name="Amitanshu Sahu" 
-                clickHandler={() => props.setRenderViewLayout({chat: true})}/>
+                <ChatBackButton setIsFolderSelected={setIsFolderSelected}/>
             </StyledDiv>
         )
     }
@@ -29,19 +69,26 @@ export default function ChatView(props: {setRenderViewLayout: Function}): JSX.El
             <StyledDiv>
                 <AccountBox 
                 type={{folder: true}} 
-                name={"Contacts"} count={2} 
-                clickHandler={showContactAccounts}/>
+                name={"Contacts"} 
+                count={2} 
+                clickHandler={() => showContactAccounts("chat")}/>
 
                 <AccountBox 
                 type={{folder: true}} 
-                name={"Non-contacts"} count={23} 
-                clickHandler={showContactAccounts}/>
+                name={"Non-contacts"} 
+                count={23} 
+                clickHandler={() => showContactAccounts("chat")}/>
 
                 <AccountBox 
                 type={{folder: true}} 
                 name={"Channels"} 
-                clickHandler={showContactAccounts}/>
-                <AccountBox type={{folder: true}} name={"Groups"} count={100} clickHandler={showContactAccounts}/>
+                clickHandler={() => showContactAccounts("channel")}/>
+
+                <AccountBox 
+                type={{folder: true}} 
+                name={"Groups"} 
+                count={100} 
+                clickHandler={() => showContactAccounts("group")}/>
     
                 <div className="add-holder">
                     <Add />
