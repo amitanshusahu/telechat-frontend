@@ -14,8 +14,6 @@ interface Props {
     clickHandler: VoidFunction
 }
 
-let render = 0;
-
 export default function AccountBox(props: Props): JSX.Element {
 
     const [imgsrc, setImgSrc] = useState<string>()
@@ -33,7 +31,10 @@ export default function AccountBox(props: Props): JSX.Element {
         if(props.type.channel && props.img == undefined){
             setImgSrc("https://img.freepik.com/premium-vector/vector-cartoon-television-monitor-icon-comic-style-tv-screen-concept-illustration-pictogram-tv-show-business-splash-effect-concept_157943-4378.jpg")
         }
-        console.log(render++);
+
+        if(props.type.group && props.img == undefined){
+            setImgSrc("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyhnPr1G81_uAeV9gqpWXQdmCH7i0DGFV8w&usqp=CAU");
+        }
     });
 
     return (

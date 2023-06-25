@@ -40,9 +40,9 @@ export default function ChatView(props: {setRenderViewLayout: Function}): JSX.El
                 <StyledDiv>
                     <ChatBackButton setIsFolderSelected={setIsFolderSelected}/>
                     <AccountBox 
-                    type={{chat: true}} 
-                    name="Amitanshu Sahu" 
-                    clickHandler={() => props.setRenderViewLayout({chat: true})}/>
+                    type={{channel: true}} 
+                    name="Anime Central" 
+                    clickHandler={() => props.setRenderViewLayout({channel: true})}/>
                 </StyledDiv>
             )
         }
@@ -51,9 +51,9 @@ export default function ChatView(props: {setRenderViewLayout: Function}): JSX.El
                 <StyledDiv>
                    <ChatBackButton setIsFolderSelected={setIsFolderSelected}/>
                     <AccountBox 
-                    type={{chat: true}} 
-                    name="Amitanshu Sahu" 
-                    clickHandler={() => props.setRenderViewLayout({chat: true})}/>
+                    type={{group: true}} 
+                    name="Programming Hub" 
+                    clickHandler={() => props.setRenderViewLayout({group: true})}/>
                 </StyledDiv>
             )
         }

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import ChatLayout from "./ChatLayout"
+import ChannelLayout from "./ChannelLayout"
 
 interface Props {
     renderLayout: {
@@ -21,7 +22,7 @@ export default function ViewLayout(props: Props): JSX.Element{
     if( props.renderLayout.channel ){
         return(
             <StyledDiv>
-                <div>Channel</div>
+                <ChannelLayout />
             </StyledDiv>
         )
     }
